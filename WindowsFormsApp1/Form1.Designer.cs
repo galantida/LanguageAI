@@ -45,7 +45,7 @@
             this.txtEntry.Name = "txtEntry";
             this.txtEntry.Size = new System.Drawing.Size(1039, 20);
             this.txtEntry.TabIndex = 2;
-            this.txtEntry.Text = "David is programmer.";
+            this.txtEntry.Text = "David and Fay are married ,and have two childrend.";
             this.txtEntry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEntry_KeyDown);
             // 
             // txtConversastion

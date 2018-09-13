@@ -28,32 +28,34 @@ namespace WebPageReader
 
             int minimumLength = 3;
             int start = 0;
-            int end = paragraphString.Length;
+            int end = 0;
 
             if (paragraphString.Length > 0) {
-                while (end > 0) // don't add empty strings
+                while (end != -1) // don't add empty strings
                 {
-                    end = paragraphString.IndexOfAny(delimiters, start) + 1; // find next delimiter
+                    end = paragraphString.IndexOfAny(delimiters, start); // find next delimiter
 
-                    int length = end - start; // get length
+                    // get the content upto and including the delimiter or just the rest
+                    int length = 0; 
+                    if (end != -1) length = (end + 1) - start;
+                    else length = paragraphString.Length - start;
+                        
+                    string content = paragraphString.Substring(start, length); 
 
-                    string content = "";
-                    if (end == 0) content = paragraphString.Substring(start); // get the rest of the content
-                    else content = paragraphString.Substring(start, length); // get the content upto and including the delimiter
-
+                    // add to results
                     if ((length < minimumLength) && (sentenceStrings.Count > 0))
                     {
                         // too small add it to last string
-                        sentenceStrings[sentenceStrings.Count - 1] += content;
+                        sentenceStrings[sentenceStrings.Count - 1] += content; 
                     }
                     else
                     {
-                        if (end == 0) sentenceStrings.Add(content); // add a new sentence string
-                        else sentenceStrings.Add(content); // add a new sentence string
+                        // add a new sentence string
+                        sentenceStrings.Add(content); 
                     }
 
                     // set next start
-                    start = end; 
+                    start = end + 1; 
                 }
             }
 
@@ -86,8 +88,23 @@ namespace WebPageReader
             string delimiter = "";
             foreach (clsFragment fragment in this.fragments)
             {
-                result += delimiter + fragment.toString(outputType);
-                delimiter = " ";
+                switch (outputType)
+                {
+                    case OutputType.toDiagram:
+                        {
+                            result += delimiter + "Fragment[" + fragment.toString(outputType) + "]";
+                            delimiter = " ";
+                            break;
+                        }
+                    default:
+                        {
+                            result += delimiter + fragment.toString(outputType);
+                            delimiter = " ";
+                            break;
+                        }
+                }
+                
+                
             }
             result += "  ";
 

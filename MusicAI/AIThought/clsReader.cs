@@ -23,9 +23,9 @@ namespace WebPageReader
             {
                 foreach (clsSentence sentence in paragraph.sentences)
                 {
-                    bool foundVerb = false;
                     foreach (clsFragment fragment in sentence.fragments)
                     {
+                        bool foundVerb = false;
                         foreach (clsSegment segment in fragment.segments)
                         {
                             segment.concept = memory.recall(segment.text); //set segment concept

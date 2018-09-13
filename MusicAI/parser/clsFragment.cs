@@ -22,49 +22,51 @@ namespace WebPageReader
         // parse paragraph based on sentence delimiters
         public static List<clsFragment> parseSentenceString(string sentenceString)
         {
-            List<string> clauseStrings = new List<string>();
+            List<string> fragmentStrings = new List<string>();
 
 
             int minimumLength = 3;
             int start = 0;
-            int end = sentenceString.Length;
+            int end = 0;
 
             if (sentenceString.Length > 0)
             {
-                while (end > 0) // don't add empty strings
+                while (end != -1) // don't add empty strings
                 {
-                    end = sentenceString.IndexOfAny(delimiters, start) + 1; // find next delimiter
+                    end = sentenceString.IndexOfAny(delimiters, start); // find next delimiter
 
-                    int length = end - start; // get length
+                    // get the content upto and including the delimiter or just the rest
+                    int length = 0;
+                    if (end != -1) length = (end + 1) - start; // get length
+                    else length = sentenceString.Length - start; // get length
 
-                    string content = "";
-                    if (end == 0) content = sentenceString.Substring(start); // get the rest of the content
-                    else content = sentenceString.Substring(start, length); // get the content upto and including the delimiter
+                    string content = sentenceString.Substring(start, length);
 
-                    if ((length < minimumLength) && (clauseStrings.Count > 0))
+                    // add to results
+                    if ((length < minimumLength) && (fragmentStrings.Count > 0))
                     {
-                        // too small add it to last string
-                        clauseStrings[clauseStrings.Count - 1] += content;
+                        // too small to be a stand alone fragment add it to last string
+                        fragmentStrings[fragmentStrings.Count - 1] += content;
                     }
                     else
                     {
-                        if (end == 0) clauseStrings.Add(content); // add a new sentence string
-                        else clauseStrings.Add(content); // add a new sentence string
+                        // add a new fragment string
+                        fragmentStrings.Add(content); 
                     }
 
-                    start = end; // set next start
+                    start = end + 1; // set next start
                 }
             }
 
             // filter and move string to to clause objects
-            List<clsFragment> clauses = new List<clsFragment>();
-            foreach (string clauseString in clauseStrings)
+            List<clsFragment> fragments = new List<clsFragment>();
+            foreach (string fragmentString in fragmentStrings)
             {
-                clsFragment clause = new clsFragment(clauseString); // trim spaces only
-                if (clause.segments.Count > 0) clauses.Add(clause);
+                clsFragment clause = new clsFragment(fragmentString); // trim spaces only
+                if (clause.segments.Count > 0) fragments.Add(clause);
 
             }
-            return clauses;
+            return fragments;
         }
 
         public bool isSentence

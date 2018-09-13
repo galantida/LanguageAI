@@ -4,3 +4,9 @@ C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debu
 C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\WebPageReader.dll
 C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\WebPageReader.pdb
 C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\WebPageReader.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\WebPageReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\WebPageReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\HtmlAgilityPack.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\obj\Debug\WebPageReader.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\obj\Debug\WebPageReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\obj\Debug\WebPageReader.pdb
