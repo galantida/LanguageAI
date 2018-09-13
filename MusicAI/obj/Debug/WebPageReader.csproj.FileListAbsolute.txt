@@ -1,0 +1,6 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debug\WebPageReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debug\WebPageReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debug\HtmlAgilityPack.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\WebPageReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\WebPageReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\WebPageReader.csprojResolveAssemblyReference.cache

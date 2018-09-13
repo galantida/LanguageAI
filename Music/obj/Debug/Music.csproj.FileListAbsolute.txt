@@ -1,0 +1,5 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\Music\bin\Debug\Music.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\Music\bin\Debug\Music.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\Music\obj\Debug\Music.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\Music\obj\Debug\Music.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\Music\obj\Debug\Music.csprojResolveAssemblyReference.cache

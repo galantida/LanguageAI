@@ -1,0 +1,6 @@
+c:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debug\MusicAI.dll
+c:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debug\MusicAI.pdb
+c:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\MusicAI.dll
+c:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\MusicAI.pdb
+c:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\bin\Debug\HtmlAgilityPack.dll
+c:\Users\dave\Documents\Visual Studio 2017\Projects\ConsoleApp1\MusicAI\obj\Debug\MusicAI.csprojResolveAssemblyReference.cache
