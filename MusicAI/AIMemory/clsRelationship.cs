@@ -8,15 +8,15 @@ namespace WebPageReader
 {
     public class clsRelationship
     {
-        public clsConcept parentConcept;
-        public clsConcept childConcept;
+        public clsConcept subjectConcept;
+        public clsConcept objectConcept;
         public string relationshipType;
 
-        public clsRelationship(clsConcept parentConcept, string relationshipType, clsConcept childConcept)
+        public clsRelationship(clsConcept subjectConcept, string relationshipType, clsConcept objectConcept)
         {
-            this.parentConcept = parentConcept;
+            this.subjectConcept = subjectConcept;
             this.relationshipType = relationshipType;
-            this.childConcept = childConcept;
+            this.objectConcept = objectConcept;
         }
     }
 }

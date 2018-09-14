@@ -24,7 +24,7 @@ namespace WebPageReader
         }
 
         // parse clauses based on segment delimiters
-        public static List<clsSegment> parseClauseString(string clauseString)
+        public static List<clsSegment> parsefragmentString(string clauseString)
         {
             string[] segmentStrings = clauseString.Split(' '); // just use space to delimit
 
@@ -150,10 +150,10 @@ namespace WebPageReader
                     // analysis
                     string analysis = "";
                     string delimiter = "";
-                    List<clsConcept> concepts = this.concept.childConcepts("is");
-                    foreach (clsConcept concept in concepts)
+                    List<clsRelationship> relationships = this.concept.objectRelationships("is");
+                    foreach (clsRelationship relationship in relationships)
                     {
-                        analysis += delimiter + concept.text;
+                        analysis += delimiter + relationship.objectConcept.text;
                         delimiter = ",";
                     }
                     return "( '" + this.text + "' " + analysis + " )";

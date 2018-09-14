@@ -9,7 +9,6 @@ namespace WebPageReader
     public class clsComprehension : clsReader
     {
         public clsMemory memory;
-        public List<clsConcept> concepts;
 
         public clsWikipedia wiki;
 
@@ -31,7 +30,7 @@ namespace WebPageReader
         public void comprehend(string documentString)
         {
             base.parseDocumentString(documentString); // parsing
-            this.concepts = base.read(); // word mapping
+            base.read(); // word mapping
 
         }
     }

@@ -41,7 +41,7 @@ namespace WebPageReader
         // link two concepts
         private clsRelationship learn(clsConcept concept, string verbString, clsConcept indirectConcept)
         {
-            return concept.connectChild(verbString, indirectConcept);
+            return concept.connectObject(verbString, indirectConcept);
         }
 
         /*********************************************************************
@@ -121,27 +121,27 @@ namespace WebPageReader
         // *******************************
         public clsRelationship recallRelationship(clsConcept concept, string verbString, clsConcept childConcept)
         {
-            return concept.connectChild(verbString, childConcept);
+            return concept.connectObject(verbString, childConcept);
         }
 
         // auto string conversions
         public clsRelationship recallRelationship(string conceptString, string verbString, string childConceptString)
         {
             clsConcept concept = this.recall(conceptString);
-            return concept.connectChild(verbString, this.recall(childConceptString));
+            return concept.connectObject(verbString, this.recall(childConceptString));
         }
 
         // auto string conversions
         public clsRelationship recall(string conceptString, string verbString, clsConcept childConcept)
         {
             clsConcept concept = this.recall(conceptString);
-            return concept.connectChild(verbString, childConcept);
+            return concept.connectObject(verbString, childConcept);
         }
 
         // auto string conversions
         public clsRelationship recall(clsConcept concept, string verbString, string chilrdConceptString)
         {
-            return concept.connectChild(verbString, this.recall(chilrdConceptString));
+            return concept.connectObject(verbString, this.recall(chilrdConceptString));
         }
 
         // *******************************
@@ -229,7 +229,7 @@ namespace WebPageReader
                 long relationshipCount = 0;
                 foreach (clsConcept concept in _concepts)
                 {
-                    relationshipCount += concept.childRelationships(null).Count;
+                    relationshipCount += concept.objectRelationships(null).Count;
                 }
                 result += relationshipCount + " relationships.\r\n";
 
@@ -243,7 +243,7 @@ namespace WebPageReader
             // simple tense verbs do not use helping verbs except for will or shall
             // no helping verbs
 
-            memory.recallRelationships(new List<string>(new string[] { "noun", "verb", "pronoun", "ajective", "adverb", "preposition", "conjunction", "determiner" }), "is", "Part of Speech");
+            memory.recallRelationships(new List<string>(new string[] { "noun", "verb", "pronoun", "proper noun", "ajective", "adverb", "preposition", "conjunction", "determiner" }), "is", "Part of Speech");
 
             // perfect tense (have has or had helping verb) will is used to show future e.g. will have
             memory.recallRelationships(new List<string>(new string[] { "being", "be", "does", "do", "has", "have", "having" }), "is", new List<string>(new string[] { "verb", "helping", "present tense" })); // 'be, do, has' present modifyable future with will
@@ -269,7 +269,7 @@ namespace WebPageReader
             memory.recallRelationships(new List<string>(new string[] { "and", "but", "if", "or" }), "is", "conjunction");
 
             // determiners - Determiners are words placed in front of a noun to make it clear what the noun refers to.
-            memory.recallRelationships(new List<string>(new string[] { "a", "an", "the", "their" }), "is", "determiner");
+            memory.recallRelationships(new List<string>(new string[] { "a", "an", "the", "their" }), "is", new List<string>(new string[] { "determiner", "adjective" }));
 
             // genders pronouns (incomplete)
             memory.recallRelationship("male", "is", "gender");
@@ -304,7 +304,7 @@ namespace WebPageReader
             // indefinite
             memory.recallRelationships(new List<string>(new string[] { "anybody", "anyone", "anything", "each", "either", "every", "everyone", "everything", "neither", "nobody", "no one", "nothing", "one", "sombody", "someone", "something" }), "is", new List<string>(new string[] { "pronoun", "indefinite", "singular" }));
             memory.recallRelationships(new List<string>(new string[] { "both", "few", "many", "several", "everybody" }), "is", new List<string>(new string[] { "pronoun", "indefinite", "plural" }));
-            memory.recallRelationships(new List<string>(new string[] { "all", "any", "most", "none", "sonme" }), "is", new List<string>(new string[] { "pronoun", "indefinite" }));
+            memory.recallRelationships(new List<string>(new string[] { "all", "any", "most", "none", "some" }), "is", new List<string>(new string[] { "pronoun", "indefinite" }));
 
             // reflexive
             memory.recallRelationships(new List<string>(new string[] { "myself", "yourself", "himself", "herself", "itself" }), "is", new List<string>(new string[] { "pronoun", "reflexive", "singular" }));
@@ -322,7 +322,7 @@ namespace WebPageReader
             memory.recallRelationships(new List<string>(new string[] { "ours", "yours", "theirs" }), "is", new List<string>(new string[] { "pronoun", "possessive", "plural" }));
 
             // reciprolcol
-            memory.recallRelationships(new List<string>(new string[] { "each other", "one anoter" }), "is", new List<string>(new string[] { "pronoun", "reciprolcal", "plural" }));
+            memory.recallRelationships(new List<string>(new string[] { "each other", "one another" }), "is", new List<string>(new string[] { "pronoun", "reciprolcal", "plural" }));
 
 
             memory.recallRelationships(new List<string>(new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }), "is", "month");

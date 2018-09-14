@@ -8,6 +8,8 @@ namespace WebPageReader
 {
     public class clsSentence
     {
+        // subject, predicate
+        // noun, verb phrases
         public List<clsFragment> fragments = null;
 
         public static char[] delimiters = new char[] { '.', '!', '?' };

@@ -49,7 +49,14 @@
     <Compile Include="AIThought\clsAI.cs" />
     <Compile Include="AIThought\clsPronounTracker.cs" />
     <Compile Include="AIMemory\clsMemory.cs" />
-    <Compile Include="AIThought\clsReader.cs" />
+    <Compile Include="reader\clsClause.cs" />
+    <Compile Include="reader\clsObjectPhrase.cs" />
+    <Compile Include="reader\clsPredicatePhrase.cs" />
+    <Compile Include="reader\clsObject.cs" />
+    <Compile Include="reader\clsVerb.cs" />
+    <Compile Include="reader\clsSubject.cs" />
+    <Compile Include="reader\clsSubjectPhrase.cs" />
+    <Compile Include="reader\clsReader.cs" />
     <Compile Include="parser\clsFragment.cs" />
     <Compile Include="AIThought\clsComprehension.cs" />
     <Compile Include="parser\clsParagraph.cs" />
@@ -61,6 +68,7 @@
     <Compile Include="parser\clsSegment.cs" />
     <Compile Include="parser\parsingUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reader\modifier.cs" />
     <Compile Include="utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

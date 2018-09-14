@@ -8,8 +8,8 @@ namespace WebPageReader
 {
     public class clsConcept
     {
-        private List<clsRelationship> _childRelationships = new List<clsRelationship>();
-        private List<clsRelationship> _parentRelationships = new List<clsRelationship>();
+        private List<clsRelationship> _objectRelationships = new List<clsRelationship>();
+        private List<clsRelationship> _subjectRelationships = new List<clsRelationship>();
         
 
         // one link could have multiple indirect objects
@@ -29,73 +29,92 @@ namespace WebPageReader
             _text = text;
         }
 
-        // make a child relationship between this concept and one that is indirect to this one
-        public clsRelationship connectChild(string verbString, clsConcept childConcept)
+        // recall a single parent relationship of this type to the specified concept
+        public clsRelationship subjectRelationship(string verbString, clsConcept subjectConcept)
         {
-            // when both parameters are passed only one item should be returned
-            List<clsRelationship> relationships = childConcept.parentRelationships(verbString, this);
-
-            // is there already a relationship
-            clsRelationship relationship = null;
-            if (relationships.Count > 0)
+            // get all relationships of this type
+            foreach (clsRelationship relationship in this._subjectRelationships)
             {
-                relationship = relationships[0];
+                if ((relationship.subjectConcept == subjectConcept) && (relationship.relationshipType == verbString))
+                {
+                    return relationship;
+                }
             }
-            else 
+            return null;
+        }
+
+        // recall a single child relationship of this type to the specified concept
+        public clsRelationship objectRelationship(string verbString, clsConcept objectConcept)
+        {
+            // get all relationships of this type
+            foreach (clsRelationship relationship in this._objectRelationships)
             {
-                // create a relation ship
-                relationship = new clsRelationship(this, verbString, childConcept);
-                this._childRelationships.Add((relationship)); // add to our children
-                childConcept.connectParent(relationship); // tell the child concept to link us as a parent
+                if ((relationship.objectConcept == objectConcept) && (relationship.relationshipType == verbString))
+                {
+                    return relationship;
+                }
+            }
+            return null;
+        }
+
+        // make a child relationship between this subject and an object (subject is object)
+        public clsRelationship connectSubject(string verbString, clsConcept subjectConcept)
+        {
+            clsRelationship relationship = this.subjectRelationship(verbString, subjectConcept);
+            if (relationship == null)
+            {
+                relationship = new clsRelationship(subjectConcept, verbString, this);
+                _subjectRelationships.Add(relationship);
+                subjectConcept.connectObject(relationship);
+            }
+            return relationship;
+        }
+
+        // make a parent relationship between this object and a subject (subject is object)
+        public clsRelationship connectObject(string verbString, clsConcept objectConcept)
+        {
+            clsRelationship relationship = this.objectRelationship(verbString, objectConcept);
+            if (relationship == null)
+            {
+                relationship = new clsRelationship(this, verbString, objectConcept);
+                _objectRelationships.Add(relationship);
+                objectConcept.connectSubject(relationship);
             }
             return relationship;
         }
 
         // make a parent relationship where this object is the indirect one
-        public void connectParent(clsRelationship relationship)
+        public void connectObject(clsRelationship relationship)
         {
-            if (relationship.childConcept == this) this._parentRelationships.Add(relationship);
-        }
-
-
-        // recall a single child relationship of this type to the specified concept
-        public clsRelationship childRelationship(string verbString, clsConcept childConcept)
-        {
-            // get all relationships of this type
-            foreach (clsRelationship relationship in this._childRelationships)
-            {
-                if ((relationship.childConcept == childConcept) && (relationship.relationshipType == verbString))
-                {
-                    return relationship;
+            if (relationship.subjectConcept == this) {
+                if (!_objectRelationships.Contains(relationship)) {
+                    _objectRelationships.Add(relationship);
                 }
             }
-            return null;
         }
 
-        // recall a single parent relationship of this type to the specified concept
-        public clsRelationship parentRelationship(string verbString, clsConcept concept)
+        public void connectSubject(clsRelationship relationship)
         {
-            // get all relationships of this type
-            foreach (clsRelationship relationship in this._parentRelationships)
+            if (relationship.objectConcept == this)
             {
-                if ((relationship.childConcept == concept) && (relationship.relationshipType == verbString))
+                if (!_subjectRelationships.Contains(relationship))
                 {
-                    return relationship;
+                    _subjectRelationships.Add(relationship);
                 }
             }
-            return null;
+
         }
 
 
         // *******************************************************
         // public concept relationship queries
         // *******************************************************
-        public List<clsRelationship> childRelationships(clsConcept concept = null)
+        public List<clsRelationship> objectRelationships(clsConcept concept = null)
         {
             List<clsRelationship> relationships = new List<clsRelationship>();
-            foreach (clsRelationship relationship in _childRelationships)
+            foreach (clsRelationship relationship in _objectRelationships)
             {
-                if ((concept == null) || (concept == relationship.childConcept))
+                if ((concept == null) || (concept == relationship.objectConcept))
                 {
                     // limit scope to a single concept if passed
                     relationships.Add(relationship);
@@ -104,12 +123,12 @@ namespace WebPageReader
             return relationships;
         }
 
-        public List<clsRelationship> childRelationships(string verbString = null, clsConcept concept = null)
+        public List<clsRelationship> objectRelationships(string verbString = null, clsConcept concept = null)
         {
             List<clsRelationship> relationships = new List<clsRelationship>();
-            foreach (clsRelationship relationship in _childRelationships)
+            foreach (clsRelationship relationship in _objectRelationships)
             {
-                if ((concept == null) || (concept == relationship.childConcept))
+                if ((concept == null) || (concept == relationship.objectConcept))
                 {
                     if ((verbString == null) || (verbString == relationship.relationshipType))
                     {
@@ -120,46 +139,40 @@ namespace WebPageReader
             return relationships;
         }
 
-        public List<clsConcept> childConcepts(string verbString = null, clsConcept childConcept = null)
+        public List<clsRelationship> subjectRelationships(string verbString = null, clsConcept subjectConcept = null)
         {
-            // get filtered list of relationships
-            List<clsRelationship> relationships = childRelationships(verbString, childConcept);
+            List<clsRelationship> relationships = new List<clsRelationship>();
+            foreach (clsRelationship relationship in _subjectRelationships)
+            {
+                if ((subjectConcept == null) || (subjectConcept == relationship.subjectConcept))
+                {
+                    if ((verbString == null) || (verbString == relationship.relationshipType))
+                    {
+                        relationships.Add(relationship);
+                    }
+                }
+            }
+            return relationships;
+        }
 
+        public static List<clsConcept> getObjectConcepts(List<clsRelationship> relationships)
+        {
             // pull out all of the concepts
             List<clsConcept> concepts = new List<clsConcept>();
             foreach (clsRelationship relationship in relationships)
             {
-                concepts.Add(relationship.childConcept);
+                concepts.Add(relationship.objectConcept);
             }
             return concepts;
         }
 
-        public List<clsRelationship> parentRelationships(string verbString = null, clsConcept parentConcept = null)
+        public static List<clsConcept> getSubjectConcepts(List<clsRelationship> relationships)
         {
-            List<clsRelationship> relationships = new List<clsRelationship>();
-            foreach (clsRelationship relationship in _parentRelationships)
-            {
-                if ((parentConcept == null) || (parentConcept == relationship.parentConcept))
-                {
-                    if ((verbString == null) || (verbString == relationship.relationshipType))
-                    {
-                        relationships.Add(relationship);
-                    }
-                }
-            }
-            return relationships;
-        }
-
-        public List<clsConcept> parentConcepts(string verbString = null, clsConcept parentConcept = null)
-        {
-            // get filtered list of relationships
-            List<clsRelationship> relationships = parentRelationships(verbString, parentConcept);
-
             // pull out all of the concepts
             List<clsConcept> concepts = new List<clsConcept>();
             foreach (clsRelationship relationship in relationships)
             {
-                concepts.Add(relationship.parentConcept);
+                concepts.Add(relationship.subjectConcept);
             }
             return concepts;
         }

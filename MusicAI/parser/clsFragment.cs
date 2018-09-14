@@ -11,11 +11,9 @@ namespace WebPageReader
         public List<clsSegment> segments = null; // words, punctuation, datetimes etc...
         public static char[] delimiters = new char[] { ',', ';' };
 
-        public clsFragment(string clauseString)
+        public clsFragment(string fragmentString)
         {
-            segments = clsSegment.parseClauseString(clauseString);
-
-            identifyProperNouns();
+            segments = clsSegment.parsefragmentString(fragmentString);
         }
 
 
@@ -95,45 +93,6 @@ namespace WebPageReader
                 char segmentChar = this.segments[this.segments.Count - 1].text[0];
                 if (segmentChar == '?') return true;
                 else return false;
-            }
-        }
-
-        public void identify_old()
-        {
-            // find inital groups like U.S.A
-            // find dates
-            // match names first last , titles, 
-
-            //identifyVocabWords();
-            //identifyProperNouns();
-
-        }
-
-        public void identifyProperNouns()
-        {
-            // thias has problems combining pronouns in titles that have lower case words like "Rock and Roll".
-            // maybe adding a quote search as well will help
-
-            for (int s = 0; s < this.segments.Count; s++)
-            {
-                // check that it has not already been identified
-                if (segments[s].concept == null)
-                {
-                    if (segments[s].isCapitalized)
-                    {
-                        // merge multiple capitalized words into a single proper noun
-                        int currentSegment = s;
-                        while (segments[s].isCapitalized && (s < segments.Count() - 1))
-                        {
-                            if (segments[s + 1].isCapitalized)
-                            {
-                                segments[currentSegment].text += " " + segments[s + 1].text;
-                                segments.RemoveAt(s + 1);
-                            }
-                            else s++;
-                        }
-                    }
-                }
             }
         }
 

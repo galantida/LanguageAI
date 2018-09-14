@@ -24,6 +24,8 @@ namespace WebPageReader
 
         public void send(string text)
         {
+            response = "";
+
             comprehension.comprehend(text);
 
             // first sentence
@@ -47,28 +49,45 @@ namespace WebPageReader
                 }
                 else if (firstClause.segments.Count > 1)
                 {
-                    // noun verb query
+                    // interogative sentence
                     clsConcept concept = memory.recall(firstWord);
-                    List<clsRelationship> relationships = concept.childRelationships(secondWord);
-                    string list = firstWord + " " + secondWord + " ";
 
-                    // concept question
-                    string delimiter = "";
-                    foreach (clsRelationship relationship in relationships)
+                    List<clsRelationship> relationships;
+                    if (concept.objectRelationship("is", memory.recall("verb")) == null)
                     {
-                        list += delimiter + relationship.childConcept.text;
-                        delimiter = ",";
-                    }
-                    response = list + "\r\n";
+                        // question Noun verb (David is?);
+                         relationships = concept.objectRelationships(secondWord);
 
+                        string delimiter = "";
+                        foreach (clsRelationship relationship in relationships)
+                        {
+                            response += delimiter + relationship.objectConcept.text;
+                            delimiter = ",";
+                        }
+                        response = firstWord + " " + secondWord + " " + response;
+                    }
+                    else
+                    {
+                        // question verb noun ( is David?)
+                        concept = memory.recall(secondWord);
+
+                        string delimiter = "";
+                        relationships = concept.subjectRelationships(firstWord);
+                        foreach (clsRelationship relationship in relationships)
+                        {
+                            response += delimiter + relationship.subjectConcept.text;
+                            delimiter = ",";
+                        }
+                        response += " " + firstWord + " " + secondWord + " ";
+                    }
                 }
                 else if (firstClause.segments.Count > 0)
                 {
                     // concept question
                     clsConcept concept = memory.recall(firstWord);
-                    foreach (clsRelationship relationship in concept.childRelationships(null))
+                    foreach (clsRelationship relationship in concept.objectRelationships(null))
                     {
-                        response = concept.text + " " + relationship.relationshipType + " " + relationship.childConcept.text + "\r\n";
+                        response = concept.text + " " + relationship.relationshipType + " " + relationship.objectConcept.text + "\r\n";
                     }
                 }
 
