@@ -8,62 +8,56 @@ namespace WebPageReader
 {
     public class clsConcept
     {
-        private List<clsRelationship> _objectRelationships = new List<clsRelationship>();
-        private List<clsRelationship> _subjectRelationships = new List<clsRelationship>();
-        
+        private List<clsRelationship> _objectRelationships = new List<clsRelationship>(); // where this concept is the object
+        private List<clsRelationship> _subjectRelationships = new List<clsRelationship>(); // where this concept is the subject
+        private List<clsPattern> _patterns = new List<clsPattern>();
+
 
         // one link could have multiple indirect objects
         // example - is first person, is second person
+        public clsConcept(clsPattern pattern)
+        {
+            this._patterns.Add(pattern);
+        }
 
-        private string _text;
-        public string text
+        public long totalRelationships
         {
             get
             {
-                return _text;
+                return _objectRelationships.Count() + _subjectRelationships.Count();
             }
         }
 
-        public clsConcept(string text)
+        public long totalPatterns
         {
-            _text = text;
-        }
-
-        // recall a single parent relationship of this type to the specified concept
-        public clsRelationship subjectRelationship(string verbString, clsConcept subjectConcept)
-        {
-            // get all relationships of this type
-            foreach (clsRelationship relationship in this._subjectRelationships)
+            get
             {
-                if ((relationship.subjectConcept == subjectConcept) && (relationship.relationshipType == verbString))
-                {
-                    return relationship;
-                }
+                return _patterns.Count();
             }
-            return null;
         }
 
-        // recall a single child relationship of this type to the specified concept
-        public clsRelationship objectRelationship(string verbString, clsConcept objectConcept)
+
+        // ***************************************************************
+        #region Linking and Learning
+
+        // assign a pattern to make this concept searchable
+        public void connectPattern(clsPattern pattern)
         {
-            // get all relationships of this type
-            foreach (clsRelationship relationship in this._objectRelationships)
+            if (!_patterns.Contains(pattern))
             {
-                if ((relationship.objectConcept == objectConcept) && (relationship.relationshipType == verbString))
-                {
-                    return relationship;
-                }
+                _patterns.Add(pattern);
+                pattern.linkConcept(this);
             }
-            return null;
         }
+
 
         // make a child relationship between this subject and an object (subject is object)
-        public clsRelationship connectSubject(string verbString, clsConcept subjectConcept)
+        public clsRelationship connectSubject(clsConcept typeConcept, clsConcept subjectConcept)
         {
-            clsRelationship relationship = this.subjectRelationship(verbString, subjectConcept);
+            clsRelationship relationship = this.subjectRelationship(typeConcept, subjectConcept);
             if (relationship == null)
             {
-                relationship = new clsRelationship(subjectConcept, verbString, this);
+                relationship = new clsRelationship(subjectConcept, typeConcept, this);
                 _subjectRelationships.Add(relationship);
                 subjectConcept.connectObject(relationship);
             }
@@ -71,12 +65,12 @@ namespace WebPageReader
         }
 
         // make a parent relationship between this object and a subject (subject is object)
-        public clsRelationship connectObject(string verbString, clsConcept objectConcept)
+        public clsRelationship connectObject(clsConcept typeConcept, clsConcept objectConcept)
         {
-            clsRelationship relationship = this.objectRelationship(verbString, objectConcept);
+            clsRelationship relationship = this.objectRelationship(typeConcept, objectConcept);
             if (relationship == null)
             {
-                relationship = new clsRelationship(this, verbString, objectConcept);
+                relationship = new clsRelationship(this, typeConcept, objectConcept);
                 _objectRelationships.Add(relationship);
                 objectConcept.connectSubject(relationship);
             }
@@ -84,15 +78,6 @@ namespace WebPageReader
         }
 
         // make a parent relationship where this object is the indirect one
-        public void connectObject(clsRelationship relationship)
-        {
-            if (relationship.subjectConcept == this) {
-                if (!_objectRelationships.Contains(relationship)) {
-                    _objectRelationships.Add(relationship);
-                }
-            }
-        }
-
         public void connectSubject(clsRelationship relationship)
         {
             if (relationship.objectConcept == this)
@@ -105,32 +90,64 @@ namespace WebPageReader
 
         }
 
+        public void connectObject(clsRelationship relationship)
+        {
+            if (relationship.subjectConcept == this)
+            {
+                if (!_objectRelationships.Contains(relationship))
+                {
+                    _objectRelationships.Add(relationship);
+                }
+            }
+        }
+
+       
+
+        #endregion
+
+
+        #region Lookup and searches
+
+
+        // recall a single parent relationship of this type to the specified concept
+        public clsRelationship subjectRelationship(clsConcept typeConcept, clsConcept subjectConcept)
+        {
+            // get all relationships of this type
+            foreach (clsRelationship relationship in this._subjectRelationships)
+            {
+                if ((relationship.subjectConcept == subjectConcept) && (relationship.typeConcept == typeConcept))
+                {
+                    return relationship;
+                }
+            }
+            return null;
+        }
+
+        // recall a single child relationship of this type to the specified concept
+        public clsRelationship objectRelationship(clsConcept typeConcept, clsConcept objectConcept)
+        {
+            // get all relationships of this type
+            foreach (clsRelationship relationship in this._objectRelationships)
+            {
+                if ((relationship.objectConcept == objectConcept) && (relationship.typeConcept == typeConcept))
+                {
+                    return relationship;
+                }
+            }
+            return null;
+        }
 
         // *******************************************************
         // public concept relationship queries
         // *******************************************************
-        public List<clsRelationship> objectRelationships(clsConcept concept = null)
+        public List<clsRelationship> objectRelationships(clsConcept typeConcept = null, clsConcept concept = null)
         {
             List<clsRelationship> relationships = new List<clsRelationship>();
             foreach (clsRelationship relationship in _objectRelationships)
             {
                 if ((concept == null) || (concept == relationship.objectConcept))
                 {
-                    // limit scope to a single concept if passed
-                    relationships.Add(relationship);
-                }
-            }
-            return relationships;
-        }
-
-        public List<clsRelationship> objectRelationships(string verbString = null, clsConcept concept = null)
-        {
-            List<clsRelationship> relationships = new List<clsRelationship>();
-            foreach (clsRelationship relationship in _objectRelationships)
-            {
-                if ((concept == null) || (concept == relationship.objectConcept))
-                {
-                    if ((verbString == null) || (verbString == relationship.relationshipType))
+                    if ((typeConcept == null) || (typeConcept == relationship.typeConcept))
                     {
                         relationships.Add(relationship);
                     }
@@ -139,14 +156,14 @@ namespace WebPageReader
             return relationships;
         }
 
-        public List<clsRelationship> subjectRelationships(string verbString = null, clsConcept subjectConcept = null)
+        public List<clsRelationship> subjectRelationships(clsConcept typeConcept = null, clsConcept subjectConcept = null)
         {
             List<clsRelationship> relationships = new List<clsRelationship>();
             foreach (clsRelationship relationship in _subjectRelationships)
             {
                 if ((subjectConcept == null) || (subjectConcept == relationship.subjectConcept))
                 {
-                    if ((verbString == null) || (verbString == relationship.relationshipType))
+                    if ((typeConcept == null) || (typeConcept == relationship.typeConcept))
                     {
                         relationships.Add(relationship);
                     }
@@ -175,6 +192,46 @@ namespace WebPageReader
                 concepts.Add(relationship.subjectConcept);
             }
             return concepts;
+        }
+
+        public clsPattern firstPattern
+        {
+            get
+            {
+                // concepts should always have patterns as well. We should be able to delete this if after a while
+                if (_patterns.Count > 0) return _patterns[0];
+                else return null;
+            }
+        }
+
+        #endregion 
+
+        public string toJSON()
+        {
+            string delimiter;
+            string result = "{";
+            result += "\"firstPattern\":" + this.firstPattern.toJSON(false);
+            result += ",\"subjectRelationships\":[";
+            delimiter = "";
+            foreach (clsRelationship relationship in _subjectRelationships)
+            {
+                result += delimiter + relationship.toJSON(false);
+                delimiter = ",";
+            }
+            result += "]";
+
+            result += ",\"objectRelationships\":[";
+            delimiter = "";
+            foreach (clsRelationship relationship in _objectRelationships)
+            {
+                result += delimiter + relationship.toJSON(false);
+                delimiter = ",";
+            }
+            result += "]";
+
+            result += "}";
+
+            return result;
         }
 
     }

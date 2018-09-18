@@ -12,8 +12,9 @@ namespace WebPageReader
     {
         public static char[] delimiters = new char[] { ':', '(', ')', '[', ']', '"' }; // this should include conjuctions
         public string text;
-        public clsConcept concept = null;
+        public clsPattern pattern = null;
         public Diagram diagram;
+        public string partsOfSpeech;
 
         // segment specific properties
         Dictionary<string, string> properties = new Dictionary<string, string>();
@@ -147,22 +148,12 @@ namespace WebPageReader
                     
                 case OutputType.toPartsOfSpeech:
 
-                    // analysis
-                    string analysis = "";
-                    string delimiter = "";
-                    List<clsRelationship> relationships = this.concept.objectRelationships("is");
-                    foreach (clsRelationship relationship in relationships)
-                    {
-                        analysis += delimiter + relationship.objectConcept.text;
-                        delimiter = ",";
-                    }
-                    return "( '" + this.text + "' " + analysis + " )";
+                    if (this.isPunctuation) return this.text;
+                    return "( '" + this.text + "' " + this.partsOfSpeech + " )";
 
                 case OutputType.toDiagram:
 
                     if (this.isPunctuation) return this.text;
-
-                    // analysis
                     return "( '" + this.text + "' " + this.diagram + " )";
 
                 default:

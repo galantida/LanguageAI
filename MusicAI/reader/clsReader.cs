@@ -17,6 +17,10 @@ namespace WebPageReader
 
         public void read()
         {
+            clsConcept isConcept = memory.recallConcept("is");
+            clsConcept verbConcept = memory.recallConcept("verb");
+
+
             foreach (clsParagraph paragraph in base.page.paragraphs)
             {
                 foreach (clsSentence sentence in paragraph.sentences)
@@ -26,13 +30,33 @@ namespace WebPageReader
                         bool foundVerb = false;
                         foreach (clsSegment segment in fragment.segments)
                         {
-                            segment.concept = memory.recall(segment.text); //set segment concept
+                            //set segment pattern
+                            segment.pattern = memory.recallCreatePattern(segment.text);
+
+                            // get concept relationships
+                            segment.partsOfSpeech = "";
+                            clsConcept segmentConcept = segment.pattern.firstConcept;
+                            List<clsRelationship> relationships = segmentConcept.subjectRelationships(isConcept);
+                            foreach (clsRelationship relationship in relationships)
+                            {
+                                segment.partsOfSpeech += relationship.objectConcept.firstPattern.text;
+                            }
                             
+
+                            // diagram code
                             // map subject and predicate
-                            if ((!foundVerb) && (segment.concept.subjectRelationship("is", memory.recall("verb")) != null)) foundVerb = true;
+                            if (!foundVerb) {
+                                foreach (clsConcept concept in segment.pattern.concepts)
+                                {
+                                    if (concept.subjectRelationship(isConcept, verbConcept) != null) foundVerb = true;
+                                }
+                                
+                            }
                             if (!foundVerb) segment.diagram = Diagram.subject;
                             else segment.diagram = Diagram.predicate;
                         }
+
+                        // identify multi word pronouns
                         identifyProperNouns(fragment);
                     }
                 }
@@ -43,6 +67,8 @@ namespace WebPageReader
         {
             // thias has problems combining pronouns in titles that have lower case words like "Rock and Roll".
             // maybe adding a quote search as well will help
+            clsConcept isConcept = memory.recallConcept("is");
+            clsConcept properNounConcept = memory.recallConcept("proper noun");
 
             for (int s = 0; s < fragment.segments.Count; s++)
             {
@@ -59,7 +85,8 @@ namespace WebPageReader
                         }
                         else s++;
                     }
-                    fragment.segments[currentSegment].concept.connectObject("is", memory.recall("proper noun"));
+
+                    fragment.segments[currentSegment].pattern.firstConcept.connectObject(isConcept, properNounConcept);
                 }
             }
         }

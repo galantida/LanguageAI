@@ -67,21 +67,27 @@ namespace WebPageReader
             return fragments;
         }
 
-        public bool isSentence
+        public bool isCapitalized
         {
-            
             get
             {
-                // does it begin with a capital and end with punctuation
-                if (segments[0].isCapitalized)
-                {
-                    // does it end with sentence or clause punctuation
-                    char segmentChar = segments[segments.Count-1].text[0];
-                    if (clsSentence.delimiters.Contains(segmentChar) || clsFragment.delimiters.Contains(segmentChar)) {
-                        return true;
-                    }
-                }
-                return false;
+                return segments[0].isCapitalized;
+            }
+        }
+
+        public bool endsInPunctuation
+        {
+            get
+            {
+                return segments[segments.Count-1].isPunctuation;
+            }
+        }
+
+        public clsSegment lastSegment
+        {
+            get
+            {
+                return this.segments[segments.Count - 1];
             }
         }
 

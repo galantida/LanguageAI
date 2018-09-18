@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AIMemory\clsConcept.cs" />
+    <Compile Include="AIMemory\clsPattern.cs" />
     <Compile Include="AIMemory\clsRelationship.cs" />
     <Compile Include="AIThought\clsAI.cs" />
     <Compile Include="AIThought\clsPronounTracker.cs" />

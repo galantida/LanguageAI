@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebPageReader
 {
+    public enum SentenceType { interogative, declaritve, imperitive }
+
     public class clsSentence
     {
         // subject, predicate
@@ -75,11 +77,33 @@ namespace WebPageReader
         }
        
 
-        public bool interrogative
+        public SentenceType type 
         {
             get
             {
-                return this.fragments[this.fragments.Count()-1].interrogative;
+                if (this.lastFragment.lastSegment.text == "?") return SentenceType.interogative;
+                else return SentenceType.declaritve;
+            }
+        }
+
+        public clsFragment lastFragment
+        {
+            get
+            {
+                return this.fragments[fragments.Count - 1];
+            }
+        }
+
+        public long length
+        {
+            get
+            {
+                long count = 0;
+                foreach (clsFragment fragment in this.fragments)
+                {
+                    count += fragment.segments.Count;
+                }
+                return count;
             }
         }
         

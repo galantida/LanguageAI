@@ -20,199 +20,129 @@ namespace WebPageReader
         // lists can be (and list) or (or lists)
 
         // concept verb concept
-        private List<clsConcept> _concepts = new List<clsConcept>();
+        private List<clsPattern> _patterns = new List<clsPattern>();
 
         /*********************************************************************
-        * private calls learning and linking basic concepts
+        * calls for learning and recalling patterns
         *********************************************************************/
-
         // learn a single concept
-        private clsConcept learn(string conceptString)
+        public clsPattern learnPattern(string patternString)
         {
-            clsConcept response = _recall(conceptString); // check does not already exist for safty
-            if (response == null)
+            clsPattern pattern = this.recallPattern(patternString);
+            if (pattern == null)
             {
-                response = new clsConcept(conceptString);
-                _concepts.Add(response);
+                pattern = new clsPattern(patternString);
+                _patterns.Add(pattern);
             }
-            return response;
+            return pattern;
         }
 
-        // link two concepts
-        private clsRelationship learn(clsConcept concept, string verbString, clsConcept indirectConcept)
+        public clsPattern recallPattern(string patternString)
         {
-            return concept.connectObject(verbString, indirectConcept);
-        }
-
-        /*********************************************************************
-        * private calls for reading memory
-        *********************************************************************/
-
-        // get a specific concept
-        private clsConcept _recall(string conceptString)
-        {
-            foreach (clsConcept concept in _concepts)
+            foreach (clsPattern pattern in this._patterns)
             {
-                if (concept.text == conceptString) return concept;
+                if (pattern.text == patternString) return pattern;
             }
             return null;
         }
 
-        // get a list of concepts
-        private List<clsConcept> _recall(List<string> conceptStrings)
+        public clsPattern recallCreatePattern(string patternString)
         {
-            List<clsConcept> response = new List<clsConcept>();
-            foreach (clsConcept concept in _concepts)
+            foreach (clsPattern pattern in this._patterns)
             {
-                if (conceptStrings.Contains(concept.text)) response.Add(concept);
+                if (pattern.text == patternString) return pattern;
             }
-            return response;
+
+            // learn pattern
+            return learnPattern(patternString);
         }
+
 
         /*********************************************************************
-         * public calls for reading and writing memory and recording the experience
-         *********************************************************************/
-
-        // lookup an existing or create a new concept
-        public clsConcept recall(string conceptString)
+        * calls for general learning
+        *********************************************************************/
+        public void learn(clsConcept subjectConcept, clsConcept typeConcept, clsConcept objectConcept)
         {
-            clsConcept response = _recall(conceptString);
-            if (response == null)
+            clsRelationship relationship = subjectConcept.objectRelationship(typeConcept, objectConcept);
+            if (relationship == null)
             {
-                response = learn(conceptString);
+                subjectConcept.connectObject(typeConcept, objectConcept);
             }
-            return response;
         }
 
-        // lookup exiting or create new concepts
-        public List<clsConcept> recall(List<string> conceptStrings)
+        public void learn(List<clsConcept> subjectConcepts, List<clsConcept> typeConcepts, List<clsConcept> objectConcepts)
         {
-            // get all existing concepts that match
-            List<clsConcept> concepts = _recall(conceptStrings);
-
-            // loop through conceptstrings
-            foreach (string conceptString in conceptStrings)
+            foreach (clsConcept subjectConcept in subjectConcepts)
             {
-                // loop through the matching concepts
-                bool found = false;
-                foreach (clsConcept concept in concepts)
+                foreach (clsConcept typeConcept in typeConcepts)
                 {
-                    if (conceptString == concept.text)
+                    foreach (clsConcept objectConcept in objectConcepts)
                     {
-                        found = true;
-                        break;
-                    }
-                }
-
-                // if this concept does not exist then create it
-                if (found == false)
-                {
-                    concepts.Add(learn(conceptString));
-                }
-            }
-
-            return concepts;
-        }
-
-        
-
-        // *******************************
-        // recall compound concepts
-        // *******************************
-        public clsRelationship recallRelationship(clsConcept concept, string verbString, clsConcept childConcept)
-        {
-            return concept.connectObject(verbString, childConcept);
-        }
-
-        // auto string conversions
-        public clsRelationship recallRelationship(string conceptString, string verbString, string childConceptString)
-        {
-            clsConcept concept = this.recall(conceptString);
-            return concept.connectObject(verbString, this.recall(childConceptString));
-        }
-
-        // auto string conversions
-        public clsRelationship recall(string conceptString, string verbString, clsConcept childConcept)
-        {
-            clsConcept concept = this.recall(conceptString);
-            return concept.connectObject(verbString, childConcept);
-        }
-
-        // auto string conversions
-        public clsRelationship recall(clsConcept concept, string verbString, string chilrdConceptString)
-        {
-            return concept.connectObject(verbString, this.recall(chilrdConceptString));
-        }
-
-        // *******************************
-        // encounter compound concept lists
-        // *******************************
-        public List<clsRelationship> recallRelationShips(List<clsConcept> concepts, List<string> verbStrings, List<clsConcept> childConcepts)
-        {
-            List<clsRelationship> response = new List<clsRelationship>();
-
-            foreach (clsConcept concept in concepts)
-            {
-                foreach (clsConcept childConcept in childConcepts)
-                {
-                    foreach (string verbString in verbStrings)
-                    {
-                        response.Add(learn(concept, verbString, childConcept));
+                        this.learn(subjectConcept, typeConcept, objectConcept);
                     }
                 }
             }
-            return response;
         }
 
-        public List<clsRelationship> recallRelationships(List<string> conceptStrings, List<string> verbStrings, List<clsConcept> childConcepts)
+        public void learn(string subjectPatternString, string typePatternString, string objectPatternString)
         {
-            return recallRelationShips(this.recall(conceptStrings), verbStrings, childConcepts);
+            clsPattern subjectPattern = this.recallCreatePattern(subjectPatternString);
+            clsPattern typePattern = this.recallCreatePattern(typePatternString);
+            clsPattern objectPattern = this.recallCreatePattern(objectPatternString);
+            this.learn(subjectPattern.firstConcept, typePattern.firstConcept, objectPattern.firstConcept);
         }
 
-        public List<clsRelationship> recallRelationships(List<clsConcept> concepts, List<string> verbStrings, List<string> childConceptStrings)
+        public void learn(List<string> subjectPatternStrings, List<string> typePatternStrings, List<string> objectPatternStrings)
         {
-            return recallRelationShips(concepts, verbStrings, this.recall(childConceptStrings));
+            foreach (string subjectPatternString in subjectPatternStrings)
+            {
+                foreach (string typePatternString in typePatternStrings)
+                {
+                    foreach (string objectPatternString in objectPatternStrings)
+                    {
+                        this.learn(subjectPatternString, typePatternString, objectPatternString);
+                    }
+                }
+            }
         }
 
-        public List<clsRelationship> recallRelationships(List<string> conceptStrings, List<string> verbStrings, List<string> childConceptStrings)
+
+        /*********************************************************************
+        * calls for general recolection
+        *********************************************************************/
+        public List<clsRelationship> recallObjectRelationship(clsPattern subjectPattern, clsPattern typePattern)
         {
-            return recallRelationShips(this.recall(conceptStrings), verbStrings, this.recall(childConceptStrings));
+            return subjectPattern.firstConcept.objectRelationships(typePattern.firstConcept);
         }
 
-        public List<clsRelationship> recallRelationships(List<string> conceptStrings, string verbString, List<clsConcept> childConcepts)
+        public List<clsRelationship> recallSubjectRelationship(clsPattern typePattern, clsPattern objectPattern)
         {
-            return recallRelationShips(this.recall(conceptStrings), new List<string>(new string[] { verbString }), childConcepts);
+            return objectPattern.firstConcept.subjectRelationships(typePattern.firstConcept);
         }
 
-        public List<clsRelationship> recallRelationships(List<clsConcept> concepts, string verbString, List<string> childConceptStrings)
+        // just returing the first one for now. Maybe later we can add context so it return oine relevant to the current conversasion
+        public clsConcept recallConcept(string patternString)
         {
-            return recallRelationShips(concepts, new List<string>(new string[] { verbString }), this.recall(childConceptStrings));
+            foreach (clsPattern pattern in this._patterns)
+            {
+                if (pattern.text == patternString)
+                {
+                    if (pattern.concepts.Count > 0) return pattern.concepts[0];
+                }
+            }
+            return null;
         }
 
-        public List<clsRelationship> recallRelationships(List<string> conceptStrings, string verbString, List<string> childConceptStrings)
-        {
-            return recallRelationShips(this.recall(conceptStrings), new List<string>(new string[] { verbString }), this.recall(childConceptStrings));
-        }
-
-        public List<clsRelationship> recallRelationships(List<string> conceptStrings, string verbString, string childConceptString)
-        {
-            return recallRelationShips(this.recall(conceptStrings), new List<string>(new string[] { verbString }), this.recall(new List<string>(new string[] { childConceptString })));
-        }
-
-        public List<clsRelationship> recallRelationships(string conceptString, string verbString, string childConceptString)
-        {
-            return recallRelationShips(this.recall(new List<string>(new string[] { conceptString })), new List<string>(new string[] { verbString }), this.recall(new List<string>(new string[] { childConceptString })));
-        }
 
 
         /*********************************************************************
         * public calls for general access
         *********************************************************************/
-        public long totalConcepts
+        public long totalPatterns
         {
             get
             {
-                return _concepts.Count();
+                return _patterns.Count();
             }
         }
         public string diagnostic
@@ -221,23 +151,34 @@ namespace WebPageReader
             {
                 string result = "\r\n";
                 result += "Memory Diagnostics.\r\n";
+                result += _patterns.Count() + " patterns.\r\n"; // patterns
 
-                // concepts
-                result += _concepts.Count() + " concepts.\r\n";
-
-                // relation ships
-                long relationshipCount = 0;
-                foreach (clsConcept concept in _concepts)
-                {
-                    relationshipCount += concept.objectRelationships(null).Count;
-                }
-                result += relationshipCount + " relationships.\r\n";
-
+                result = this.toJSON();
                 return result;
             }
         }
 
+        public string toJSON()
+        {
+            string delimiter = "";
+            string result = "{\"memoryDump\":";
 
+            delimiter = "";
+            result += "[";
+            foreach (clsPattern pattern in _patterns)
+            {
+                result += delimiter + pattern.toJSON(true);
+                delimiter = ",";
+            }
+            result += "]";
+
+            result += "}";
+
+            return result;
+        }
+
+
+        /*
         public static void load(ref clsMemory memory)
         {
             // simple tense verbs do not use helping verbs except for will or shall
@@ -333,5 +274,6 @@ namespace WebPageReader
 
 
         }
+        */
     }
 }

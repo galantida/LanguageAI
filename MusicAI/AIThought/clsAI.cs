@@ -18,7 +18,10 @@ namespace WebPageReader
         public clsAI()
         {
             memory = new clsMemory();
-            clsMemory.load(ref memory);
+            //clsMemory.load(ref memory);
+            memory.learn("is", "is", "verb"); // teach it is or equals?
+
+
             comprehension = new clsComprehension(memory);
         }
 
@@ -29,74 +32,75 @@ namespace WebPageReader
             comprehension.comprehend(text);
 
             // first sentence
-            clsFragment firstClause = comprehension.page.paragraphs[0].sentences[0].fragments[0];
-            if ((firstClause.interrogative) || (!firstClause.interrogative))
+            clsSentence sentence = comprehension.page.paragraphs[0].sentences[0];
+
+            switch (sentence.type)
             {
-                string firstWord = null;
-                string secondWord = null;
-                string thirdWord = null;
-
-                firstWord = firstClause.segments[0].text;
-                if (firstClause.segments.Count > 1) secondWord = firstClause.segments[1].text;
-                if (firstClause.segments.Count > 2) thirdWord = firstClause.segments[2].text;
-
-                if (firstClause.segments.Count > 2)
-                {
-                    // learn three word statment
-                    long concepts = memory.totalConcepts;
-                    memory.recallRelationship(firstWord, secondWord, thirdWord);
-                    debug += "Learned " + (memory.totalConcepts - concepts) + " new concepts.\r\n";
-                }
-                else if (firstClause.segments.Count > 1)
-                {
-                    // interogative sentence
-                    clsConcept concept = memory.recall(firstWord);
-
-                    List<clsRelationship> relationships;
-                    if (concept.objectRelationship("is", memory.recall("verb")) == null)
+                case SentenceType.interogative:
                     {
-                        // question Noun verb (David is?);
-                         relationships = concept.objectRelationships(secondWord);
+                        // asking a question
 
-                        string delimiter = "";
-                        foreach (clsRelationship relationship in relationships)
-                        {
-                            response += delimiter + relationship.objectConcept.text;
-                            delimiter = ",";
-                        }
-                        response = firstWord + " " + secondWord + " " + response;
+
+                        break;
                     }
-                    else
+                case SentenceType.declaritve:
                     {
-                        // question verb noun ( is David?)
-                        concept = memory.recall(secondWord);
+                        // making a statment
 
-                        string delimiter = "";
-                        relationships = concept.subjectRelationships(firstWord);
-                        foreach (clsRelationship relationship in relationships)
-                        {
-                            response += delimiter + relationship.subjectConcept.text;
-                            delimiter = ",";
-                        }
-                        response += " " + firstWord + " " + secondWord + " ";
+                        break;
                     }
-                }
-                else if (firstClause.segments.Count > 0)
-                {
-                    // concept question
-                    clsConcept concept = memory.recall(firstWord);
-                    foreach (clsRelationship relationship in concept.objectRelationships(null))
+                case SentenceType.imperitive:
                     {
-                        response = concept.text + " " + relationship.relationshipType + " " + relationship.objectConcept.text + "\r\n";
-                    }
-                }
+                        // giving direction
 
+
+                        break;
+                    }
             }
         }
 
-        public void threeWordSentence(clsSentence sentence)
+        public void declaritive(clsSentence sentence)
         {
+            // learn three word statment
+            //memory.learn(firstWord, secondWord, thirdWord);
+            //debug += "Learned " + (memory.totalConcepts - concepts) + " new concepts.\r\n";
+        }
 
+        public void interogative(clsSentence sentence)
+        {
+            /*
+            // interogative sentence (expecting response) use the question mark?
+            clsConcept concept = memory.recallCreateConcept(firstWord);
+
+            List<clsRelationship> relationships;
+            if (concept.objectRelationship("is", memory.recall("verb")) == null)
+            {
+                // question Noun verb (David is?);
+                relationships = concept.objectRelationships(secondWord);
+
+                string delimiter = "";
+                foreach (clsRelationship relationship in relationships)
+                {
+                    response += delimiter + relationship.objectConcept.text;
+                    delimiter = ",";
+                }
+                response = firstWord + " " + secondWord + " " + response;
+            }
+            else
+            {
+                // question verb noun ( is David?)
+                concept = memory.recall(secondWord);
+
+                string delimiter = "";
+                relationships = concept.subjectRelationships(firstWord);
+                foreach (clsRelationship relationship in relationships)
+                {
+                    response += delimiter + relationship.subjectConcept.text;
+                    delimiter = ",";
+                }
+                response += " " + firstWord + " " + secondWord + " ";
+            }
+            */
         }
 
         
