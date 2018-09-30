@@ -9,6 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1", "WindowsFormsApp1\Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music", "Music\Music.csproj", "{E3FBA978-1C57-4FE0-8A5E-D2A60D5E10E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "memoryRelative", "memoryRelative\memoryRelative.csproj", "{7513DA59-BC84-4E63-BBEF-6C3DC1DA6C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textParser", "textParser\textParser.csproj", "{0455FDEB-88E3-471B-85B4-C628912F4CDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textReader", "textReader\textReader.csproj", "{C4E1F0FE-2B2E-4753-A102-0EE6F8850E84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utils", "utils\utils.csproj", "{883A21E5-7EDD-4869-950F-DECEC702C244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textComprehension", "comprehension\textComprehension.csproj", "{F4ED012D-0FAB-4E79-8132-52D5B6AF0D3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "artificialIntelligence", "artificialIntelligence\artificialIntelligence.csproj", "{C513C8AA-6BB6-4A79-A6BA-18256C1F5CFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +39,30 @@ Global
 		{E3FBA978-1C57-4FE0-8A5E-D2A60D5E10E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3FBA978-1C57-4FE0-8A5E-D2A60D5E10E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3FBA978-1C57-4FE0-8A5E-D2A60D5E10E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7513DA59-BC84-4E63-BBEF-6C3DC1DA6C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7513DA59-BC84-4E63-BBEF-6C3DC1DA6C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7513DA59-BC84-4E63-BBEF-6C3DC1DA6C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7513DA59-BC84-4E63-BBEF-6C3DC1DA6C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0455FDEB-88E3-471B-85B4-C628912F4CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0455FDEB-88E3-471B-85B4-C628912F4CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0455FDEB-88E3-471B-85B4-C628912F4CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0455FDEB-88E3-471B-85B4-C628912F4CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E1F0FE-2B2E-4753-A102-0EE6F8850E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E1F0FE-2B2E-4753-A102-0EE6F8850E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E1F0FE-2B2E-4753-A102-0EE6F8850E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E1F0FE-2B2E-4753-A102-0EE6F8850E84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883A21E5-7EDD-4869-950F-DECEC702C244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883A21E5-7EDD-4869-950F-DECEC702C244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883A21E5-7EDD-4869-950F-DECEC702C244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883A21E5-7EDD-4869-950F-DECEC702C244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4ED012D-0FAB-4E79-8132-52D5B6AF0D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4ED012D-0FAB-4E79-8132-52D5B6AF0D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4ED012D-0FAB-4E79-8132-52D5B6AF0D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4ED012D-0FAB-4E79-8132-52D5B6AF0D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C513C8AA-6BB6-4A79-A6BA-18256C1F5CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C513C8AA-6BB6-4A79-A6BA-18256C1F5CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C513C8AA-6BB6-4A79-A6BA-18256C1F5CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C513C8AA-6BB6-4A79-A6BA-18256C1F5CFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

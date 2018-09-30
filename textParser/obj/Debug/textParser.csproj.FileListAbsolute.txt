@@ -1,0 +1,7 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\obj\Debug\textParser.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\bin\Debug\textParser.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\bin\Debug\textParser.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\bin\Debug\utils.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\obj\Debug\textParser.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textParser\obj\Debug\textParser.pdb

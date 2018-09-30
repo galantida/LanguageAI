@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtReader = new System.Windows.Forms.TextBox();
+            this.txtDebug = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtEntry
@@ -97,17 +97,17 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Reader";
             // 
-            // txtReader
+            // txtDebug
             // 
-            this.txtReader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReader.Location = new System.Drawing.Point(8, 22);
-            this.txtReader.Multiline = true;
-            this.txtReader.Name = "txtReader";
-            this.txtReader.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReader.Size = new System.Drawing.Size(1120, 218);
-            this.txtReader.TabIndex = 7;
+            this.txtDebug.Location = new System.Drawing.Point(8, 22);
+            this.txtDebug.Multiline = true;
+            this.txtDebug.Name = "txtDebug";
+            this.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDebug.Size = new System.Drawing.Size(1120, 218);
+            this.txtDebug.TabIndex = 7;
             // 
             // Form1
             // 
@@ -118,7 +118,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSay);
-            this.Controls.Add(this.txtReader);
+            this.Controls.Add(this.txtDebug);
             this.Controls.Add(this.txtConversastion);
             this.Controls.Add(this.txtEntry);
             this.Name = "Form1";
@@ -135,7 +135,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtReader;
+        private System.Windows.Forms.TextBox txtDebug;
     }
 }
 

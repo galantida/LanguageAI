@@ -7,4 +7,3 @@ C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\Music\bin\Debug\M
 C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\Music\bin\Debug\Music.pdb
 C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\Music\obj\Debug\Music.dll
 C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\Music\obj\Debug\Music.pdb
-C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\Music\obj\Debug\Music.csprojResolveAssemblyReference.cache

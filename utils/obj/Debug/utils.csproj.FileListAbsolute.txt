@@ -1,0 +1,4 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\utils\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\utils\bin\Debug\utils.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\utils\obj\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\utils\obj\Debug\utils.pdb

@@ -1,0 +1,7 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\bin\Debug\memoryRelative.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\bin\Debug\memoryRelative.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\obj\Debug\memoryRelative.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\obj\Debug\memoryRelative.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\bin\Debug\utils.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\memoryRelative\obj\Debug\memoryRelative.csprojResolveAssemblyReference.cache

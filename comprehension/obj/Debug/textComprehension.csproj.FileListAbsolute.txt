@@ -1,0 +1,13 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\obj\Debug\textComprehension.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\txtComprehension.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\txtComprehension.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\memoryRelative.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\textReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\textParser.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\memoryRelative.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\textReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\textParser.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\bin\Debug\utils.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\obj\Debug\txtComprehension.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\comprehension\obj\Debug\txtComprehension.pdb

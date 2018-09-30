@@ -1,0 +1,13 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\obj\Debug\artificialIntelligence.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\artificialIntelligence.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\artificialIntelligence.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\memoryRelative.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\textReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\textParser.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\memoryRelative.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\textReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\textParser.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\bin\Debug\utils.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\obj\Debug\artificialIntelligence.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\artificialIntelligence\obj\Debug\artificialIntelligence.pdb

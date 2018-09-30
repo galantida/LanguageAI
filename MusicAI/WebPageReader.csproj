@@ -44,33 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AIMemory\clsConcept.cs" />
-    <Compile Include="AIMemory\clsPattern.cs" />
-    <Compile Include="AIMemory\clsRelationship.cs" />
-    <Compile Include="AIThought\clsAI.cs" />
-    <Compile Include="AIThought\clsPronounTracker.cs" />
-    <Compile Include="AIMemory\clsMemory.cs" />
-    <Compile Include="reader\clsClause.cs" />
-    <Compile Include="reader\clsObjectPhrase.cs" />
-    <Compile Include="reader\clsPredicatePhrase.cs" />
-    <Compile Include="reader\clsObject.cs" />
-    <Compile Include="reader\clsVerb.cs" />
-    <Compile Include="reader\clsSubject.cs" />
-    <Compile Include="reader\clsSubjectPhrase.cs" />
-    <Compile Include="reader\clsReader.cs" />
-    <Compile Include="parser\clsFragment.cs" />
-    <Compile Include="AIThought\clsComprehension.cs" />
-    <Compile Include="parser\clsParagraph.cs" />
-    <Compile Include="parser\clsParser.cs" />
-    <Compile Include="parser\clsPage.cs" />
-    <Compile Include="parser\clsSentence.cs" />
     <Compile Include="dataInterfaces\clswikipedia.cs" />
     <Compile Include="dataInterfaces\clsWeb.cs" />
-    <Compile Include="parser\clsSegment.cs" />
-    <Compile Include="parser\parsingUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="reader\modifier.cs" />
-    <Compile Include="utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\textReader\textReader.csproj">
+      <Project>{c4e1f0fe-2b2e-4753-a102-0ee6f8850e84}</Project>
+      <Name>textReader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

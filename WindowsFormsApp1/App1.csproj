@@ -79,6 +79,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\artificialIntelligence\artificialIntelligence.csproj">
+      <Project>{c513c8aa-6bb6-4a79-a6ba-18256c1f5cfb}</Project>
+      <Name>artificialIntelligence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MusicAI\WebPageReader.csproj">
       <Project>{43185179-034e-4890-a290-8522a6aa72ad}</Project>
       <Name>WebPageReader</Name>

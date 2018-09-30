@@ -1,0 +1,11 @@
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\obj\Debug\textReader.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\textReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\textReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\memoryRelative.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\textParser.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\memoryRelative.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\textParser.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\bin\Debug\utils.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\obj\Debug\textReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\textReader\obj\Debug\textReader.pdb

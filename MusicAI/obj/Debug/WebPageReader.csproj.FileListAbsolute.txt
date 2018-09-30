@@ -10,3 +10,11 @@ C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug
 C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\HtmlAgilityPack.dll
 C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\obj\Debug\WebPageReader.dll
 C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\obj\Debug\WebPageReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\textReader.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\memoryRelative.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\textParser.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\utils.dll
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\textReader.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\memoryRelative.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\textParser.pdb
+C:\Users\dave\Documents\Visual Studio 2017\Projects\LanguageAI\MusicAI\bin\Debug\utils.pdb
